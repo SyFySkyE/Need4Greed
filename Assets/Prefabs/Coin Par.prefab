@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6457819997253659740}
   - component: {fileID: 6457819997253659743}
   - component: {fileID: 6457819997253659742}
-  - component: {fileID: 6457819997253659729}
   - component: {fileID: 6457819997253659728}
   - component: {fileID: 3166032493572272314}
+  - component: {fileID: 6457819997253659729}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -470,22 +470,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 0b000000
---- !u!114 &6457819997253659729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6457819997253659730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e06c6d81c62591d4a8bac2ce47e1751c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinSfx:
-  - {fileID: 8300000, guid: 2881ecd0bdb2a3c43a8081993c21de06, type: 3}
-  - {fileID: 8300000, guid: 1cb5a4003ade8d14a8a20be8a79baa49, type: 3}
-  - {fileID: 8300000, guid: 3c2cdb75f84102b47b47107f6c56a756, type: 3}
 --- !u!65 &6457819997253659728
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -595,6 +579,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6457819997253659729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6457819997253659730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06c6d81c62591d4a8bac2ce47e1751c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinSfx:
+  - {fileID: 8300000, guid: 2881ecd0bdb2a3c43a8081993c21de06, type: 3}
+  - {fileID: 8300000, guid: 1cb5a4003ade8d14a8a20be8a79baa49, type: 3}
+  - {fileID: 8300000, guid: 3c2cdb75f84102b47b47107f6c56a756, type: 3}
 --- !u!1 &6457819997924544425
 GameObject:
   m_ObjectHideFlags: 0

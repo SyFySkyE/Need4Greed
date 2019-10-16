@@ -5,6 +5,7 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     [SerializeField] private AudioClip[] coinSfx;
+    // [SerializeField] private ParticleSystem coinVfx; OnAwake for now. Maybe only enable it if players are within distance?
 
     // Start is called before the first frame update
     void Start()
