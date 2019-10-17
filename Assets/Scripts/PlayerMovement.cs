@@ -91,10 +91,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private IEnumerator StartGameOverSequence() 
+    private IEnumerator StartGameOverSequence()  // This should be in PlayerManager
     {
         dustKickVfx.Stop();
         yield return new WaitForSeconds(secondsBeforeReload);
         sceneManager.ReloadScene(); // TODO SoC
+    }
+
+    public void ToggleGameOver()
+    {
+        gameOver = true;
     }
 }
