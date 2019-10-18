@@ -6,14 +6,18 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float forwardSpeed = 5f;
     [SerializeField] private float horizontalSpeed = 2f;
+    [SerializeField] private float forwardIncrementSpeed = 10f;
+    [SerializeField] private float horizontalIncrementSpeed = 2.5f;
     [SerializeField] private float jumpForce = 17f;
     [SerializeField] private float xConstrain = 5.5f;
-    [SerializeField] private float gravityModifier = 3f;
-    [SerializeField] private float secondsBeforeReload = 1.5f;
+    [SerializeField] private float secondsBeforeReload = 2f;
     [SerializeField] private float jumpVolume = 5f;
 
     [SerializeField] private AudioClip jumpSfx;
     [SerializeField] private ParticleSystem dustKickVfx;
+    [SerializeField] private ParticleSystem jumpingVfx;
+    [SerializeField] private ParticleSystem landVfx;
+    [SerializeField] private ParticleSystem failVfx;
 
     [SerializeField] private SceneManager sceneManager; // TODO PlayerMovement should NOT know about sceneManager. Maybe use broadcastMessage()? Soc
 
@@ -27,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Physics.gravity *= gravityModifier; // TODO Bug where jumping is borked when scene is reloaded. Could be this.
         playerRB = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
@@ -74,7 +77,12 @@ public class PlayerMovement : MonoBehaviour
             playerAnim.SetTrigger("Jump_trig");
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             canJump = false;
-            dustKickVfx.Stop();
+            dustKickVfx.Stop();            
+        }
+
+        if (!canJump && playerRB.velocity.y != 0)
+        {
+            jumpingVfx.Play();
         }
     }
 
@@ -82,11 +90,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            if (canJump != true)
+            {
+                landVfx.Play();
+            }
             canJump = true;
             dustKickVfx.Play();
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
-        {
+        {            
             gameOver = true;
         }
     }
@@ -100,6 +112,30 @@ public class PlayerMovement : MonoBehaviour
 
     public void ToggleGameOver()
     {
+        gameOver = true;        
+    }
+
+    public void IncreaseSpeed()
+    {
+        forwardSpeed += forwardIncrementSpeed;
+        horizontalSpeed += horizontalIncrementSpeed;
+    }
+
+    public void GoalFailed()
+    {
         gameOver = true;
+        StartCoroutine(ToggleSpeedOff());
+        failVfx.Play();
+    }
+
+    private IEnumerator ToggleSpeedOff()
+    {
+        float currentFSpeed = forwardSpeed;
+        float currentHSpeed = horizontalSpeed;
+        forwardSpeed = 0f;
+        horizontalSpeed = 0f;
+        yield return new WaitForSeconds(secondsBeforeReload);
+        forwardSpeed = currentFSpeed;
+        horizontalSpeed = currentHSpeed;
     }
 }

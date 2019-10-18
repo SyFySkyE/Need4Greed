@@ -9,10 +9,14 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private int coinBonus = 10;
     [SerializeField] private float jumpBonus = 10f;
+    [SerializeField] private ParticleSystem landOnEnemyVfx;
+
+    private PlayerMovement pMovement;
 
     // Start is called before the first frame update
     void Start()
     {
+        pMovement = GetComponent<PlayerMovement>();
         UpdateCoinText();
     }
 
@@ -35,7 +39,24 @@ public class PlayerManager : MonoBehaviour
     public void JumpedOnEnemy()
     {
         coinsCollected += coinBonus;
+        landOnEnemyVfx.Play();
         GetComponent<Rigidbody>().AddForce(0f, jumpBonus, 0f, ForceMode.Impulse);
         UpdateCoinText();
+    }
+
+    public int GetCoinsCollected()
+    {
+        return coinsCollected;
+    }
+
+    public void GoalPassed()
+    {        
+        Debug.Log("Player passed");
+        pMovement.IncreaseSpeed();
+    }
+    
+    public void GameOver()
+    {
+        pMovement.GoalFailed();
     }
 }

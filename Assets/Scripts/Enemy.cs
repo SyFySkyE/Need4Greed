@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) // Box is only Trigger, should trigger death.
+    private void OnTriggerEnter(Collider other) // Box is only Trigger, should not trigger death.
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -88,6 +88,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            collision.gameObject.GetComponent<PlayerManager>().GameOver();
             collision.gameObject.GetComponent<PlayerMovement>().ToggleGameOver();
         }
     }
