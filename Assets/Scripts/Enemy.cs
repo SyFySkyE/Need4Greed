@@ -5,9 +5,16 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
+    [SerializeField] private float swaySpeed = 2f;
     [SerializeField] private float xConstraint = 4.5f;
+    [SerializeField] private bool xSway = false;
+    [SerializeField] private float xSwayValue = 2f;
+    [SerializeField] private bool ySway = false;
+    [SerializeField] private float ySwayValue = -1f;
 
     private Animator enemyAnim;
+    private bool moveRight = true;
+    private bool moveUp = false;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +35,44 @@ public class Enemy : MonoBehaviour
         {
             speed = -speed;
              // enemyAnim.SetTrigger("Rotate Left");
+        }
+
+        if (xSway)
+        {
+            SwayHorizontally();
+        }
+
+        if (ySway)
+        {
+            SwayVertically();
+        }
+    }
+
+    private void SwayHorizontally()
+    {        
+        if (moveRight)
+        {
+            transform.Translate(Vector3.right * Time.deltaTime * swaySpeed);
+            if (transform.position.x >= xSwayValue) moveRight = false;
+        }
+        else
+        {
+            transform.Translate(Vector3.left * Time.deltaTime * swaySpeed);
+            if (transform.position.x <= -xSwayValue) moveRight = true;
+        }
+    }
+
+    private void SwayVertically()
+    {
+        if (moveUp)
+        {
+            transform.Translate(Vector3.up * Time.deltaTime * swaySpeed);
+            if (transform.position.y >= -ySwayValue) moveUp = false;
+        }
+        else
+        {
+            transform.Translate(Vector3.down * Time.deltaTime * swaySpeed);
+            if (transform.position.y <= 0.5f) moveUp = true;
         }
     }
 
