@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpVolume = 5f;
 
     [SerializeField] private AudioClip jumpSfx;
+    [SerializeField] private AudioClip deathSfx;
     [SerializeField] private ParticleSystem dustKickVfx;
     [SerializeField] private ParticleSystem jumpingVfx;
     [SerializeField] private ParticleSystem landVfx;
@@ -84,6 +85,10 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpingVfx.Play();
         }
+        else
+        {
+            jumpingVfx.Stop();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -126,6 +131,7 @@ public class PlayerMovement : MonoBehaviour
         gameOver = true;
         StartCoroutine(ToggleSpeedOff());
         failVfx.Play();
+        playerAudio.PlayOneShot(deathSfx, 5f);
     }
 
     private IEnumerator ToggleSpeedOff()

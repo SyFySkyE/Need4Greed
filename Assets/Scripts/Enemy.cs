@@ -11,10 +11,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float xSwayValue = 2f;
     [SerializeField] private bool ySway = false;
     [SerializeField] private float ySwayValue = -1f;
+    [SerializeField] private float distanceToStartMoving = 10f;
+    [SerializeField] private GameObject player;
 
     private Animator enemyAnim;
     private bool moveRight = true;
     private bool moveUp = false;
+    private bool isCloseEnough = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +28,23 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        IsPlayerCloseEnough();
+        if (isCloseEnough)
+        {
+            StartMoving();
+        }        
+    }
+
+    private void IsPlayerCloseEnough()
+    {
+        if (player.transform.position.z >= transform.position.z - distanceToStartMoving)
+        {
+            isCloseEnough = true;
+        }
+    }
+
+    private void StartMoving()
+    {
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
         if (transform.position.x >= xConstraint)
         {
@@ -34,7 +54,7 @@ public class Enemy : MonoBehaviour
         else if (transform.position.x <= -xConstraint)
         {
             speed = -speed;
-             // enemyAnim.SetTrigger("Rotate Left");
+            // enemyAnim.SetTrigger("Rotate Left");
         }
 
         if (xSway)

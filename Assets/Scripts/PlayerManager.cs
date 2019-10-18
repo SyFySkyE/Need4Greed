@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private int coinBonus = 10;
     [SerializeField] private float jumpBonus = 10f;
     [SerializeField] private ParticleSystem landOnEnemyVfx;
+    [SerializeField] private AudioClip landOnEnemySfx;
 
     private PlayerMovement pMovement;
 
@@ -41,6 +42,7 @@ public class PlayerManager : MonoBehaviour
         coinsCollected += coinBonus;
         landOnEnemyVfx.Play();
         GetComponent<Rigidbody>().AddForce(0f, jumpBonus, 0f, ForceMode.Impulse);
+        GetComponent<AudioSource>().PlayOneShot(landOnEnemySfx, 1f);
         UpdateCoinText();
     }
 
