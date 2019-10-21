@@ -428,7 +428,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  horiSpeed: 2
-  xConstraint: 4.5
+  swaySpeed: 2
+  xConstraint: 5
   xSway: 0
   xSwayValue: 2
+  ySway: 0
+  ySwayValue: -1
+  distanceToStartMoving: 50
+  player: {fileID: 0}

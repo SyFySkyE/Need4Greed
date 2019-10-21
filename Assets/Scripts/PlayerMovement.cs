@@ -40,14 +40,21 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        DebugKeys();
         Debug.Log(gameOver);
         if (!gameOver) MoveForward();
-        else
-        {
-            StartCoroutine(StartGameOverSequence());
-        }
         MoveHorizontally();
         Jump();
+    }
+
+    private void DebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            transform.position = new Vector3(0f, 0f, 560f);
+            forwardSpeed = 30f;
+            horizontalSpeed = 14.5f;
+        }
     }
 
     private void MoveForward()
@@ -75,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && canJump)
         {
             playerAudio.PlayOneShot(jumpSfx, jumpVolume);
-            playerAnim.SetTrigger("Jump_trig");
+            playerAnim.SetTrigger("Jump_trig");            
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             canJump = false;
             dustKickVfx.Stop();            
@@ -105,12 +112,16 @@ public class PlayerMovement : MonoBehaviour
         else if (collision.gameObject.CompareTag("Obstacle"))
         {            
             gameOver = true;
+            GoalFailed();
         }
     }
 
     private IEnumerator StartGameOverSequence()  // This should be in PlayerManager
     {
         dustKickVfx.Stop();
+        StartCoroutine(ToggleSpeedOff());
+        failVfx.Play();
+        playerAudio.PlayOneShot(deathSfx, 5f);
         yield return new WaitForSeconds(secondsBeforeReload);
         sceneManager.ReloadScene(); // TODO SoC
     }
@@ -127,11 +138,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void GoalFailed()
-    {
+    {        
         gameOver = true;
-        StartCoroutine(ToggleSpeedOff());
-        failVfx.Play();
-        playerAudio.PlayOneShot(deathSfx, 5f);
+        StartCoroutine(StartGameOverSequence());
     }
 
     private IEnumerator ToggleSpeedOff()

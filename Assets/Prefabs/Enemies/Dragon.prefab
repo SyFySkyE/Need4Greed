@@ -568,11 +568,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6.5
   swaySpeed: 4
-  xConstraint: 4.5
+  xConstraint: 5
   xSway: 0
   xSwayValue: 2
   ySway: 1
   ySwayValue: -2
+  distanceToStartMoving: 50
+  player: {fileID: 0}
 --- !u!1 &1775711469362154
 GameObject:
   m_ObjectHideFlags: 0

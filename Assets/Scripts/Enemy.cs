@@ -108,6 +108,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log(collision.gameObject);
             collision.gameObject.GetComponent<PlayerManager>().GameOver();
             collision.gameObject.GetComponent<PlayerMovement>().ToggleGameOver();
         }
