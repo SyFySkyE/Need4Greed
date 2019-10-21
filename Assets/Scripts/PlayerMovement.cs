@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private ParticleSystem landVfx;
     [SerializeField] private ParticleSystem failVfx;
 
-    [SerializeField] private SceneManager sceneManager; // TODO PlayerMovement should NOT know about sceneManager. Maybe use broadcastMessage()? Soc
+    [SerializeField] private GameSceneManager sceneManager; // TODO PlayerMovement should NOT know about sceneManager. Maybe use broadcastMessage()? Soc
 
     private Rigidbody playerRB;
     private Animator playerAnim;
