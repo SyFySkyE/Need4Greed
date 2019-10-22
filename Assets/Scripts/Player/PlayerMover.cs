@@ -29,17 +29,22 @@ public class PlayerMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerManager.State != PlayerState.Dead || playerManager.State != PlayerState.Dying)
+        if (playerManager.State != PlayerState.Dead)
         {
             MoveForward();
             MoveHorizontally();
             ConstrainHorizontalMovement();
             Jump();
         }
-        else
+        else 
         {
-            this.enabled = false;
+            Stop();
         }
+    }
+
+    private void Stop()
+    {
+        playerRB.velocity = Vector3.zero;
     }
 
     private void MoveForward()
@@ -92,8 +97,16 @@ public class PlayerMover : MonoBehaviour
             horizontalSpeed += horizontalSpeedIncrement;
         }
         else if (collision.gameObject.CompareTag("Enemy"))
-        {            
-            LandOnEnemy();            
+        {
+            LandOnEnemy();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {        
+        if (other.gameObject.CompareTag("Obstacle") || other.gameObject.CompareTag("Enemy"))
+        {
+            playerManager.State = PlayerState.Dying;
         }
     }
 }

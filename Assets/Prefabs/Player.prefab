@@ -15,8 +15,11 @@ GameObject:
   - component: {fileID: 4917292163075106480}
   - component: {fileID: 2678344003610464408}
   - component: {fileID: 5924473}
+  - component: {fileID: 6961200880037333876}
+  - component: {fileID: 8142673148414910020}
   - component: {fileID: 4389786614402463785}
   - component: {fileID: 5377879417866715720}
+  - component: {fileID: 3512155124978858761}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -124,6 +127,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b91fe82ade54e640be3ed0e9042159f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6961200880037333876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6500784730947048552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77cb4f7a6daceb441ae1e6b175737f54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPoints: 3
+  secondsBeforeLoad: 3
+--- !u!114 &8142673148414910020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6500784730947048552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646b4859b2e98684fb0ec223c280d233, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinsCollected: 0
+  coinBonus: 10
+  coinText: {fileID: 0}
 --- !u!114 &4389786614402463785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,8 +189,29 @@ MonoBehaviour:
   horizontalSpeed: 10
   xConstraint: 4.9
   jumpForce: 10
+  bonusJumpForce: 20
   forwardSpeedIncrement: 10
   horizontalSpeedIncrement: 2.5
+--- !u!114 &3512155124978858761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6500784730947048552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c910317935947b4e8d49cc6ee3b7aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpSfx: {fileID: 0}
+  landSfx: {fileID: 0}
+  deathSfx: {fileID: 0}
+  coinSfx: []
+  jumpSfxVolume: 5
+  landSfxVolume: 1
+  deathSfxVolume: 5
+  coinSfxVolume: 1
 --- !u!1001 &2311964668522469606
 PrefabInstance:
   m_ObjectHideFlags: 0

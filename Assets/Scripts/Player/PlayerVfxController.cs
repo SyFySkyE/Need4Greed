@@ -31,7 +31,7 @@ public class PlayerVfxController : MonoBehaviour
         {
             StartMoveVfx();
         }
-        else if (currentState == PlayerState.Jumping)
+        else if (currentState == PlayerState.Jumped)
         {
             StartJumpVfx();
         }
@@ -45,6 +45,7 @@ public class PlayerVfxController : MonoBehaviour
         }
         else if (currentState == PlayerState.Dying)
         {
+            dustKickVfx.Stop();
             failVfx.Play(); // Plays once
         }
     }

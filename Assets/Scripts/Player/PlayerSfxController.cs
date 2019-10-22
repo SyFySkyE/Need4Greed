@@ -24,6 +24,7 @@ public class PlayerSfxController : MonoBehaviour
     void Start()
     {
         playerAudio = GetComponent<AudioSource>();
+        playerManager = GetComponent<PlayerManage>();
     }
 
     // Update is called once per frame
@@ -43,11 +44,5 @@ public class PlayerSfxController : MonoBehaviour
                 playerAudio.PlayOneShot(deathSfx, deathSfxVolume);
                 break;
         }
-    }
-
-    public void CollectCoinSfx()
-    {
-        int index = Random.Range(0, coinSfx.Length);
-        playerAudio.PlayOneShot(coinSfx[index], coinSfxVolume);
     }
 }

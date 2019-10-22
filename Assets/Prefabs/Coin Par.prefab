@@ -4770,7 +4770,7 @@ GameObject:
   - component: {fileID: 6457819997253659729}
   m_Layer: 0
   m_Name: Coin
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5234,8 +5234,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6, y: 6, z: 6}
-  m_Center: {x: 0.24247485, y: 0.2323895, z: -1.0306844}
+  m_Size: {x: 4.002102, y: 5.089708, z: 4.588513}
+  m_Center: {x: 0.4213851, y: 0.68753606, z: -1.7364284}
 --- !u!82 &3166032493572272314
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5360,7 +5360,7 @@ GameObject:
   - component: {fileID: 1325871008691469879}
   m_Layer: 0
   m_Name: Coin Par
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -44,8 +44,8 @@ public class PlayerManage : MonoBehaviour
                 State = PlayerState.Jumped;
                 break;
             case PlayerState.Dying:
-                State = PlayerState.Dead;
+                State = PlayerState.Dead;                
                 break;
         }
-    }
+    }    
 }
