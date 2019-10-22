@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float ySwayValue = -1f;
     [SerializeField] private float distanceToStartMoving = 10f;
     [SerializeField] private GameObject player;
+    [SerializeField] private float secondsBeforeDespawn = 1f;
 
     private Animator enemyAnim;
     private bool moveRight = true;
@@ -96,21 +97,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) // Box is only Trigger, should not trigger death.
+    public void EnemyDeath()
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            other.GetComponent<PlayerManager>().JumpedOnEnemy();
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Debug.Log(collision.gameObject);
-            collision.gameObject.GetComponent<PlayerManager>().GameOver();
-            collision.gameObject.GetComponent<PlayerMovement>().ToggleGameOver();
-        }
+        enemyAnim.SetTrigger("Stomped");
+        Destroy(gameObject, secondsBeforeDespawn);
     }
 }

@@ -77,13 +77,7 @@ public class PlayerMover : MonoBehaviour
             playerManager.State = PlayerState.Jumping;
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);            
         }        
-    }
-
-    private void LandOnEnemy()
-    {
-        playerManager.State = PlayerState.LandingOnEnemy;
-        playerRB.AddForce(Vector3.up * bonusJumpForce, ForceMode.Impulse);
-    }
+    }   
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -98,8 +92,15 @@ public class PlayerMover : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            LandOnEnemy();
+            LandOnEnemy(collision.gameObject);
         }
+    }
+
+    private void LandOnEnemy(GameObject enemy)
+    {
+        enemy.GetComponent<Enemy>().EnemyDeath();
+        playerManager.State = PlayerState.LandingOnEnemy;
+        playerRB.AddForce(Vector3.up * bonusJumpForce, ForceMode.Impulse);
     }
 
     private void OnTriggerEnter(Collider other)
