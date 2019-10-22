@@ -22,8 +22,8 @@ public class Coin : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
-        {            
-            other.GetComponent<PlayerManager>().AddToScore();
+        {
+            other.GetComponent<PlayerCoinCollector>().AddCoin();
             AudioSource.PlayClipAtPoint(coinSfx[Random.Range(0, coinSfx.Length)], transform.position, 1f);
             Destroy(gameObject);
         }

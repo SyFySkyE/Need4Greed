@@ -636,7 +636,7 @@ MonoBehaviour:
   speed: 6
   swaySpeed: 2
   xConstraint: 5
-  xSway: 1
+  xSway: 0
   xSwayValue: 1
   ySway: 1
   ySwayValue: -1
