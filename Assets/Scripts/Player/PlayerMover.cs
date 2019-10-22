@@ -107,7 +107,7 @@ public class PlayerMover : MonoBehaviour
     {        
         if (other.gameObject.CompareTag("Obstacle") || other.gameObject.CompareTag("Enemy"))
         {
-            playerManager.State = PlayerState.Dying;
+            playerManager.State = PlayerState.Hurt;
         }
     }
 }

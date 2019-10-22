@@ -47,7 +47,7 @@ public class PlayerLifeAndDeath : MonoBehaviour
         Debug.Log("Respawn at checkpoint");
     }
 
-    public void SubtractHP()
+    private void PlayerHurt()
     {
         healthPoints--;
         UpdateHPText();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerManage : MonoBehaviour
 {
-    public enum PlayerState { Running, Jumping, Jumped, Landing, LandingOnEnemy, Stopping, Stopped, Dying, Dead }
+    public enum PlayerState { Running, Jumping, Hurt, Recovering, Jumped, Landing, LandingOnEnemy, Stopping, Stopped, Dying, Dead }
     private PlayerState state;
     public PlayerState State
     {
@@ -42,6 +42,10 @@ public class PlayerManage : MonoBehaviour
                 break;
             case PlayerState.Jumping:
                 State = PlayerState.Jumped;
+                break;
+            case PlayerState.Hurt:
+                BroadcastMessage("PlayerHurt");
+                State = PlayerState.Running;
                 break;
             case PlayerState.Dying:
                 State = PlayerState.Dead;                

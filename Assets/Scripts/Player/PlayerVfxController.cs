@@ -10,6 +10,7 @@ public class PlayerVfxController : MonoBehaviour
     [SerializeField] ParticleSystem jumpingVfx;
     [SerializeField] ParticleSystem landVfx;
     [SerializeField] ParticleSystem landOnEnemyVfx;
+    [SerializeField] ParticleSystem hurtVfx;
     [SerializeField] ParticleSystem failVfx;
 
     private PlayerManage playerManager;
@@ -71,5 +72,21 @@ public class PlayerVfxController : MonoBehaviour
     private void PlayLandingOnEnemyVfx()
     {
         landOnEnemyVfx.Play();        
+    }
+
+    private void PlayerHurt()
+    {
+        StartCoroutine(FlashPlayer());
+    }
+
+    private IEnumerator FlashPlayer()
+    {
+        SkinnedMeshRenderer renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        for (float i = 1; i <= 0;)
+        {
+            renderer.enabled = false;
+            yield return new WaitForSeconds(i);
+            i -= 0.1f;
+        }
     }
 }

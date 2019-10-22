@@ -8,6 +8,7 @@ public class PlayerCoinCollector : MonoBehaviour
 {
     [SerializeField] private int coinsCollected = 0;
     [SerializeField] private int coinBonus = 10;
+    [SerializeField] private int coinsLostOnHurt = 5;
     [SerializeField] private TextMeshProUGUI coinText;
 
     private PlayerManage playerManager;
@@ -54,5 +55,10 @@ public class PlayerCoinCollector : MonoBehaviour
     {
         coinsCollected += coinBonus;
         UpdateCoinText();
+    }
+
+    private void PlayerHurt()
+    {
+        coinsCollected -= coinsLostOnHurt;
     }
 }

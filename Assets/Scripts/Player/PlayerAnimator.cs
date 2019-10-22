@@ -34,7 +34,7 @@ public class PlayerAnimator : MonoBehaviour
         else if (playerManager.State == PlayerState.LandingOnEnemy)
         {
             SetLandingOnEnemyAnim();
-        }
+        }        
         else if (playerManager.State == PlayerState.Dying)
         {
             SetDyingAnim();
@@ -64,5 +64,10 @@ public class PlayerAnimator : MonoBehaviour
     private void SetDyingAnim()
     {
         playerAnim.SetTrigger("Death_t");
+    }
+
+    private void PlayerHurt()
+    {
+        playerAnim.SetTrigger("Hurt");
     }
 }
