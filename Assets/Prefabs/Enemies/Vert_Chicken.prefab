@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 1516977410}
   m_Layer: 0
   m_Name: Vert_Chicken
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -436,3 +436,4 @@ MonoBehaviour:
   ySwayValue: -1
   distanceToStartMoving: 50
   player: {fileID: 0}
+  secondsBeforeDespawn: 1

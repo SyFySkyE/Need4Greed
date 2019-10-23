@@ -7,10 +7,12 @@ using static PlayerManage;
 public class PlayerLifeAndDeath : MonoBehaviour
 {
     [SerializeField] private int healthPoints = 3;
+    [SerializeField] private float recoveryTime = 3f;
     [SerializeField] private float secondsBeforeLoad = 3f;
     [SerializeField] private TextMeshProUGUI hpText;
 
     private PlayerManage playerManager;
+    private bool vulnerable = true;
 
     // Start is called before the first frame update
     void Start()
@@ -47,9 +49,15 @@ public class PlayerLifeAndDeath : MonoBehaviour
         Debug.Log("Respawn at checkpoint");
     }
 
-    private void PlayerHurt()
+    private IEnumerator PlayerHurt()
     {
-        healthPoints--;
-        UpdateHPText();
+        if (vulnerable)
+        {
+            healthPoints--;
+            UpdateHPText();
+            vulnerable = false;
+        }        
+        yield return new WaitForSeconds(recoveryTime);
+        vulnerable = true;
     }
 }

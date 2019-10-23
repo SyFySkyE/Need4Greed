@@ -8,8 +8,7 @@ public class PlayerSfxController : MonoBehaviour
     [Header("SFX Audioclips")]
     [SerializeField] private AudioClip jumpSfx;
     [SerializeField] private AudioClip landSfx;
-    [SerializeField] private AudioClip deathSfx;
-    [SerializeField] private AudioClip[] coinSfx;
+    [SerializeField] private AudioClip deathSfx;    
 
     [Header("SFX Volume")]
     [SerializeField] private float jumpSfxVolume = 5f;
