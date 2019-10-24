@@ -7,7 +7,7 @@ using static PlayerManage;
 public class PlayerLifeAndDeath : MonoBehaviour
 {
     [SerializeField] private int healthPoints = 3;
-    [SerializeField] private float recoveryTime = 3f;
+    [SerializeField] private float recoveryTime = 1f;
     [SerializeField] private float secondsBeforeLoad = 3f;
     [SerializeField] private TextMeshProUGUI hpText;
 
@@ -49,15 +49,27 @@ public class PlayerLifeAndDeath : MonoBehaviour
         Debug.Log("Respawn at checkpoint");
     }
 
-    private IEnumerator PlayerHurt()
-    {
+    private void PlayerHurt()
+    {        
         if (vulnerable)
         {
             healthPoints--;
             UpdateHPText();
             vulnerable = false;
+            StartCoroutine(Recover());
         }        
-        yield return new WaitForSeconds(recoveryTime);
+    }
+
+    private IEnumerator Recover()
+    {
+        SkinnedMeshRenderer renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        for (float i = recoveryTime; i != 0;)
+        {
+            renderer.enabled = false;
+            yield return new WaitForSeconds(i);
+            renderer.enabled = true; // Nogo
+            i -= 0.1f;
+        }
         vulnerable = true;
     }
 }
