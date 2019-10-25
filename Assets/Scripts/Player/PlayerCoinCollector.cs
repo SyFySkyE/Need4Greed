@@ -60,5 +60,6 @@ public class PlayerCoinCollector : MonoBehaviour
     private void PlayerHurt()
     {
         coinsCollected -= coinsLostOnHurt;
+        UpdateCoinText();
     }
 }

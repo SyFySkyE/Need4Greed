@@ -44,9 +44,10 @@ public class PlayerManage : MonoBehaviour
             case PlayerState.Jumping:
                 StartCoroutine(SwitchToJumpedState());
                 break;
-            case PlayerState.Hurt:
-                BroadcastMessage("PlayerHurt");
-                StartCoroutine(SwitchToRunningState());
+            case PlayerState.Hurt:                        
+                StartCoroutine(SwitchToRecoveringState());
+                break;
+            case PlayerState.Recovering:
                 break;
             case PlayerState.Dying:
                 StartCoroutine(SwitchToDeadState());                
@@ -70,6 +71,15 @@ public class PlayerManage : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         State = PlayerState.Jumped;
+    }
+    
+    private IEnumerator SwitchToRecoveringState()
+    {        
+        State = PlayerState.Recovering;        
+        BroadcastMessage("PlayerHurt");        
+        yield return new WaitForSeconds(RecoveryTime);
+        
+        StartCoroutine(SwitchToRunningState());
     }
 
     private IEnumerator SwitchToDeadState()

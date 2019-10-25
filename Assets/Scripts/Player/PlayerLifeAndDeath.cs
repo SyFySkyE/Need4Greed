@@ -60,8 +60,8 @@ public class PlayerLifeAndDeath : MonoBehaviour
     }
 
     private IEnumerator Recover()
-    {
-        yield return new WaitForSeconds(playerManager.RecoveryTime);
+    {        
+        yield return new WaitForSeconds(playerManager.RecoveryTime);        
         vulnerable = true;
     }
 }

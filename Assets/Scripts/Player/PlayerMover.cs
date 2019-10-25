@@ -98,21 +98,29 @@ public class PlayerMover : MonoBehaviour
 
     private void LandOnEnemy(GameObject enemy)
     {
-        enemy.GetComponent<Enemy>().EnemyDeath();
-        playerManager.State = PlayerState.LandingOnEnemy;
-        playerRB.AddForce(Vector3.up * bonusJumpForce, ForceMode.Impulse);
+        if (playerManager.State != PlayerState.Recovering)
+        {
+            enemy.GetComponent<Enemy>().EnemyDeath();
+            playerManager.State = PlayerState.LandingOnEnemy;
+            playerRB.AddForce(Vector3.up * bonusJumpForce, ForceMode.Impulse);
+            enemy.layer = 9; // Players do not collide with anything in this layer.
+        }        
     }
 
     private void OnTriggerEnter(Collider other)
-    {        
+    {
         if (other.gameObject.CompareTag("Obstacle") || other.gameObject.CompareTag("Enemy"))
-        {
-            playerManager.State = PlayerState.Hurt;
+        {              
+            if (playerManager.State != PlayerState.Hurt && playerManager.State != PlayerState.Recovering)
+            {
+                playerManager.State = PlayerState.Hurt;
+                other.gameObject.layer = 9; // Players will not collide with anything in this layer.
+            }            
         }
     }
 
     private void PlayerHurt()
     {
-        playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Disable colliders?
+        playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); 
     }
 }
