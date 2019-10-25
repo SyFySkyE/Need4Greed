@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerManage : MonoBehaviour
 {
+    [SerializeField] public float RecoveryTime = 1.5f;
     public enum PlayerState { Running, Jumping, Hurt, Recovering, Jumped, Landing, LandingOnEnemy, Stopping, Stopped, Dying, Dead }
     private PlayerState state;
     public PlayerState State

@@ -6,8 +6,7 @@ using static PlayerManage;
 
 public class PlayerLifeAndDeath : MonoBehaviour
 {
-    [SerializeField] private int healthPoints = 3;
-    [SerializeField] private float recoveryTime = 1f;
+    [SerializeField] private int healthPoints = 3;    
     [SerializeField] private float secondsBeforeLoad = 3f;
     [SerializeField] private TextMeshProUGUI hpText;
 
@@ -28,7 +27,7 @@ public class PlayerLifeAndDeath : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {        
         if (healthPoints <= 0)
         {
             CommencePlayerDying();
@@ -62,14 +61,7 @@ public class PlayerLifeAndDeath : MonoBehaviour
 
     private IEnumerator Recover()
     {
-        SkinnedMeshRenderer renderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        for (float i = recoveryTime; i != 0;)
-        {
-            renderer.enabled = false;
-            yield return new WaitForSeconds(i);
-            renderer.enabled = true; // Nogo
-            i -= 0.1f;
-        }
+        yield return new WaitForSeconds(playerManager.RecoveryTime);
         vulnerable = true;
     }
 }

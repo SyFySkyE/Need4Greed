@@ -13,6 +13,9 @@ public class PlayerVfxController : MonoBehaviour
     [SerializeField] ParticleSystem hurtVfx;
     [SerializeField] ParticleSystem failVfx;
 
+    [SerializeField] private float playerFlashInterval = 0.01f;
+    [SerializeField] private const int timeWhileFlashing = 5;
+
     private PlayerManage playerManager;
 
     private void Start()
@@ -81,12 +84,14 @@ public class PlayerVfxController : MonoBehaviour
 
     private IEnumerator FlashPlayer()
     {
-        SkinnedMeshRenderer renderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        for (float i = 1; i <= 0;)
-        {
-            renderer.enabled = false;
-            yield return new WaitForSeconds(i);
-            i -= 0.1f;
+        // This works, but this may not sync up with 1.5f recovery time set in PlayerManage. Set up a timer to make sure it lines up.
+        SkinnedMeshRenderer render = GetComponentInChildren<SkinnedMeshRenderer>();
+        for (int i = 1; i < timeWhileFlashing; i++)
+        {               
+            render.enabled = false;
+            yield return new WaitForSeconds(playerFlashInterval);
+            render.enabled = true;
+            yield return new WaitForSeconds(playerFlashInterval);            
         }
     }
 }

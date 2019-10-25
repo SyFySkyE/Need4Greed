@@ -37978,10 +37978,20 @@ PrefabInstance:
       propertyPath: hpText
       value: 
       objectReference: {fileID: 270421589}
+    - target: {fileID: 6961200880037333876, guid: b44092afe886a6c42903f262483b2b32,
+        type: 3}
+      propertyPath: recoveryTime
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4389786614402463785, guid: b44092afe886a6c42903f262483b2b32,
         type: 3}
       propertyPath: hurtVfx
       value: 
       objectReference: {fileID: 933286382}
+    - target: {fileID: 2678344003610464408, guid: b44092afe886a6c42903f262483b2b32,
+        type: 3}
+      propertyPath: RecoveryTime
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44092afe886a6c42903f262483b2b32, type: 3}
