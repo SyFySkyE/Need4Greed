@@ -8,13 +8,14 @@ public class PlayerSfxController : MonoBehaviour
     [Header("SFX Audioclips")]
     [SerializeField] private AudioClip jumpSfx;
     [SerializeField] private AudioClip landSfx;
+    [SerializeField] private AudioClip landOnEnemySfx;
     [SerializeField] private AudioClip deathSfx;    
 
     [Header("SFX Volume")]
     [SerializeField] private float jumpSfxVolume = 5f;
     [SerializeField] private float landSfxVolume = 1f;
+    [SerializeField] private float landOnEnemySfxVolume = 1f;
     [SerializeField] private float deathSfxVolume = 5f;
-    [SerializeField] private float coinSfxVolume = 1f;
 
     private AudioSource playerAudio;
     private PlayerManage playerManager;
@@ -40,7 +41,12 @@ public class PlayerSfxController : MonoBehaviour
                 playerAudio.PlayOneShot(jumpSfx, jumpSfxVolume);
                 break;
             case PlayerState.Dying:
+            case PlayerState.Hurt:
                 playerAudio.PlayOneShot(deathSfx, deathSfxVolume);
+                break;
+            case PlayerState.LandingOnEnemy:
+                playerAudio.PlayOneShot(landOnEnemySfx, landOnEnemySfxVolume);
+                jumpSfxVolume = 0f;
                 break;
         }
     }

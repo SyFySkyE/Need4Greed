@@ -70,6 +70,7 @@ public class PlayerManage : MonoBehaviour
     private IEnumerator SwitchToJumpedState()
     {
         yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
         State = PlayerState.Jumped;
     }
     
@@ -77,8 +78,7 @@ public class PlayerManage : MonoBehaviour
     {        
         State = PlayerState.Recovering;        
         BroadcastMessage("PlayerHurt");        
-        yield return new WaitForSeconds(RecoveryTime);
-        
+        yield return new WaitForSeconds(RecoveryTime);        
         StartCoroutine(SwitchToRunningState());
     }
 
