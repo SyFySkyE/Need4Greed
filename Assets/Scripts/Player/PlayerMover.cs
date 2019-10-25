@@ -81,7 +81,7 @@ public class PlayerMover : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") && playerManager.State == PlayerState.Jumped)
         {
             playerManager.State = PlayerState.Landing;
         }
@@ -109,5 +109,10 @@ public class PlayerMover : MonoBehaviour
         {
             playerManager.State = PlayerState.Hurt;
         }
+    }
+
+    private void PlayerHurt()
+    {
+        playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Disable colliders?
     }
 }

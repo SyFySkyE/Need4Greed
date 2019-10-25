@@ -31,26 +31,50 @@ public class PlayerManage : MonoBehaviour
         HandleChangeStates();
     }
 
-    private void HandleChangeStates()
+    private void HandleChangeStates() // Switched to Coroutines, was sometimes transitioning too fast, espeically in environments producing lower frame rates
     {
         switch (State)
         {
             case PlayerState.Landing:
-                State = PlayerState.Running;
+                StartCoroutine(SwitchToRunningState());
                 break;
             case PlayerState.LandingOnEnemy:
-                State = PlayerState.Jumping;
+                StartCoroutine(SwitchToJumpingState());
                 break;
             case PlayerState.Jumping:
-                State = PlayerState.Jumped;
+                StartCoroutine(SwitchToJumpedState());
                 break;
             case PlayerState.Hurt:
                 BroadcastMessage("PlayerHurt");
-                State = PlayerState.Running;
+                StartCoroutine(SwitchToRunningState());
                 break;
             case PlayerState.Dying:
-                State = PlayerState.Dead;                
+                StartCoroutine(SwitchToDeadState());                
                 break;
         }
     }    
+
+    private IEnumerator SwitchToRunningState()
+    {
+        yield return new WaitForEndOfFrame();
+        State = PlayerState.Running;
+    }
+
+    private IEnumerator SwitchToJumpingState()
+    {
+        yield return new WaitForEndOfFrame();
+        State = PlayerState.Jumping;
+    }
+
+    private IEnumerator SwitchToJumpedState()
+    {
+        yield return new WaitForEndOfFrame();
+        State = PlayerState.Jumped;
+    }
+
+    private IEnumerator SwitchToDeadState()
+    {
+        yield return new WaitForEndOfFrame();
+        State = PlayerState.Dead;
+    }
 }
