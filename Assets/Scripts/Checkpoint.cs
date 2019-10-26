@@ -25,9 +25,9 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {            
-            if (other.gameObject.GetComponent<PlayerManager>().GetCoinsCollected() >= coinReq)
+            if (other.gameObject.GetComponent<PlayerCoinCollector>().GetCoinsCollected() >= coinReq)
             {
-                other.gameObject.GetComponent<PlayerManager>().GoalPassed();
+                other.gameObject.GetComponent<PlayerManage>().CurrentLevelState++;
                 cpAudio.PlayOneShot(passSfx, 0.2f);
                 passVfx.Play();
                 zPosToRespawnPlayer = transform.position.z;
@@ -35,7 +35,7 @@ public class Checkpoint : MonoBehaviour
             }
             else
             {
-                other.gameObject.GetComponent<PlayerMovement>().GoalFailed();
+                other.gameObject.GetComponent<PlayerLifeAndDeath>().CommencePlayerDying();
                 StartCoroutine(RespawnAtLastCheck(other));
             }
         }

@@ -6,6 +6,20 @@ public class PlayerManage : MonoBehaviour
 {
     [SerializeField] public float RecoveryTime = 1.5f;
     public enum PlayerState { Running, Jumping, Hurt, Recovering, Jumped, Landing, LandingOnEnemy, Stopping, Stopped, Dying, Dead }
+    public enum LevelState { One, OneTwo, Two, TwoThree, Three }
+    private LevelState levelState;
+    public LevelState CurrentLevelState
+    {
+        get { return this.levelState; }
+        set
+        {
+            if (this.levelState != value)
+            {
+                this.levelState = value;
+            }
+        }
+    }
+
     private PlayerState state;
     public PlayerState State
     {
@@ -23,6 +37,7 @@ public class PlayerManage : MonoBehaviour
     void Start()
     {
         state = PlayerState.Running;
+        levelState = LevelState.One;
     }
 
     private void Update()
@@ -44,16 +59,25 @@ public class PlayerManage : MonoBehaviour
             case PlayerState.Jumping:
                 StartCoroutine(SwitchToJumpedState());
                 break;
-            case PlayerState.Hurt:                        
+            case PlayerState.Hurt:
                 StartCoroutine(SwitchToRecoveringState());
                 break;
             case PlayerState.Recovering:
                 break;
             case PlayerState.Dying:
-                StartCoroutine(SwitchToDeadState());                
+                StartCoroutine(SwitchToDeadState());
                 break;
         }
-    }    
+        switch (levelState)
+        {
+            case LevelState.OneTwo:
+                StartCoroutine(SwitchToLevelTwo());
+                break;
+            case LevelState.TwoThree:
+                StartCoroutine(SwitchToLevelThree());
+                break;
+        }
+    }
 
     private IEnumerator SwitchToRunningState()
     {
@@ -73,12 +97,12 @@ public class PlayerManage : MonoBehaviour
         yield return new WaitForEndOfFrame();
         State = PlayerState.Jumped;
     }
-    
+
     private IEnumerator SwitchToRecoveringState()
-    {        
-        State = PlayerState.Recovering;        
-        BroadcastMessage("PlayerHurt");        
-        yield return new WaitForSeconds(RecoveryTime);        
+    {
+        State = PlayerState.Recovering;
+        BroadcastMessage("PlayerHurt");
+        yield return new WaitForSeconds(RecoveryTime);
         StartCoroutine(SwitchToRunningState());
     }
 
@@ -86,5 +110,17 @@ public class PlayerManage : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         State = PlayerState.Dead;
+    }
+
+    private IEnumerator SwitchToLevelTwo()
+    {
+        yield return new WaitForEndOfFrame();
+        levelState = LevelState.Two;
+    }
+
+    private IEnumerator SwitchToLevelThree()
+    {
+        yield return new WaitForEndOfFrame();
+        levelState = LevelState.Three;
     }
 }

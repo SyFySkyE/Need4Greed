@@ -5060,12 +5060,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpSfx: {fileID: 8300000, guid: edaa31685a21f9c48bee5441d00b2088, type: 3}
-  landSfx: {fileID: 0}
-  landOnEnemySfx: {fileID: 0}
+  landSfx: {fileID: 8300000, guid: c12081ee2acf3454cb3c5b3ac2d40e05, type: 3}
+  landOnEnemySfx: {fileID: 8300000, guid: 033ce51b20270ef469f9ba221f53c235, type: 3}
   deathSfx: {fileID: 8300000, guid: 47ec81987f8b0ea44b7b1d9672fbf080, type: 3}
-  jumpSfxVolume: 5
+  jumpSfxVolume: 1
   landSfxVolume: 1
-  landOnEnemySfxVolume: 1
+  landOnEnemySfxVolume: 3
   deathSfxVolume: 5
 --- !u!1001 &2311964668522469606
 PrefabInstance:

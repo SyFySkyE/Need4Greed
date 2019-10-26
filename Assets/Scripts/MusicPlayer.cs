@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour
 {
+    [SerializeField] AudioClip level1Music;
+    [SerializeField] AudioClip level2Music;
+    [SerializeField] AudioClip bossMusic;
+
     // Start is called before the first frame update
     void Start()
     {

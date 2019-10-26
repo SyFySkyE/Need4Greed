@@ -33169,5 +33169,25 @@ PrefabInstance:
       propertyPath: hpText
       value: 
       objectReference: {fileID: 270421589}
+    - target: {fileID: 3512155124978858761, guid: b44092afe886a6c42903f262483b2b32,
+        type: 3}
+      propertyPath: landOnEnemySfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 033ce51b20270ef469f9ba221f53c235, type: 3}
+    - target: {fileID: 3512155124978858761, guid: b44092afe886a6c42903f262483b2b32,
+        type: 3}
+      propertyPath: jumpSfxVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512155124978858761, guid: b44092afe886a6c42903f262483b2b32,
+        type: 3}
+      propertyPath: landOnEnemySfxVolume
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512155124978858761, guid: b44092afe886a6c42903f262483b2b32,
+        type: 3}
+      propertyPath: landSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: c12081ee2acf3454cb3c5b3ac2d40e05, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44092afe886a6c42903f262483b2b32, type: 3}

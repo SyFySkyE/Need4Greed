@@ -40,6 +40,13 @@ public class PlayerMover : MonoBehaviour
         {
             Stop();
         }
+        switch (playerManager.CurrentLevelState)
+        {
+            case LevelState.OneTwo:
+            case LevelState.TwoThree:
+                IncreaseSpeed();
+                break;
+        }
     }
 
     private void Stop()
@@ -122,5 +129,11 @@ public class PlayerMover : MonoBehaviour
     private void PlayerHurt()
     {
         playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); 
+    }
+
+    private void IncreaseSpeed()
+    {
+        forwardSpeed += forwardSpeedIncrement;
+        horizontalSpeed += horizontalSpeedIncrement;
     }
 }

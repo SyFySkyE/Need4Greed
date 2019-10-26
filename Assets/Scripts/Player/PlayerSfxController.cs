@@ -38,16 +38,39 @@ public class PlayerSfxController : MonoBehaviour
         switch (playerManager.State)
         {
             case PlayerState.Jumping:
-                playerAudio.PlayOneShot(jumpSfx, jumpSfxVolume);
+                ToggleJumpSfx();
                 break;
             case PlayerState.Dying:
             case PlayerState.Hurt:
-                playerAudio.PlayOneShot(deathSfx, deathSfxVolume);
+                PlayHurtSfx();
+                break;
+            case PlayerState.Landing:
+                PlayLandingSfx();
                 break;
             case PlayerState.LandingOnEnemy:
-                playerAudio.PlayOneShot(landOnEnemySfx, landOnEnemySfxVolume);
-                jumpSfxVolume = 0f;
+                PlayLandingOnEnemySfx();
                 break;
         }
+    }    
+
+    private void ToggleJumpSfx()
+    {
+        playerAudio.PlayOneShot(jumpSfx, jumpSfxVolume);
+    }
+
+    private void PlayHurtSfx()
+    {
+        playerAudio.PlayOneShot(deathSfx, deathSfxVolume);
+    }
+
+    private void PlayLandingSfx()
+    {
+        playerAudio.PlayOneShot(landSfx, landSfxVolume);
+    }
+
+    private void PlayLandingOnEnemySfx()
+    {
+        playerAudio.PlayOneShot(landOnEnemySfx, landOnEnemySfxVolume);
+
     }
 }

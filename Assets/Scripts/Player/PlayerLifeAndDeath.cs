@@ -16,6 +16,7 @@ public class PlayerLifeAndDeath : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        this.gameObject.layer = 8;
         playerManager = GetComponent<PlayerManage>();
         UpdateHPText();
     }
@@ -34,18 +35,20 @@ public class PlayerLifeAndDeath : MonoBehaviour
         }        
     }
 
-    private void CommencePlayerDying()
+    public void CommencePlayerDying()
     {
-        if (playerManager.State == PlayerState.Dying)
+        this.gameObject.layer = 9;
+        if (playerManager.State != PlayerState.Dead)
         {
             StartCoroutine(GameOverRoutine());
-        }
+            playerManager.State = PlayerState.Dying;
+        }        
     }
 
     private IEnumerator GameOverRoutine()
     {
-        yield return new WaitForSeconds(secondsBeforeLoad);
-        Debug.Log("Respawn at checkpoint");
+        vulnerable = false;
+        yield return new WaitForSeconds(secondsBeforeLoad);        
     }
 
     private void PlayerHurt()

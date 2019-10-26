@@ -31,26 +31,26 @@ public class PlayerVfxController : MonoBehaviour
 
     private void ManagePlayerState(PlayerState currentState)
     {
-        if (currentState == PlayerState.Running)
+        if (currentState != PlayerState.Dead || currentState != PlayerState.Dying)
         {
-            StartMoveVfx();
-        }
-        else if (currentState == PlayerState.Jumped)
-        {
-            StartJumpVfx();
-        }
-        else if (currentState == PlayerState.Landing)
-        {            
-            landVfx.Play(); // Plays once
-        }
-        else if (currentState == PlayerState.LandingOnEnemy)
-        {
-            PlayLandingOnEnemyVfx();
-        }
-        else if (currentState == PlayerState.Dying)
-        {
-            dustKickVfx.Stop();
-            failVfx.Play(); // Plays once
+            switch (currentState)
+            {
+                case PlayerState.Running:
+                    StartMoveVfx();
+                    break;
+                case PlayerState.Jumped:
+                    StartJumpVfx();
+                    break;
+                case PlayerState.Landing:
+                    landVfx.Play();
+                    break;
+                case PlayerState.LandingOnEnemy:
+                    PlayLandingOnEnemyVfx();
+                    break;
+                case PlayerState.Dying:
+                    PlayDeathVfx();
+                    break;
+            }
         }
     }
 
@@ -81,6 +81,13 @@ public class PlayerVfxController : MonoBehaviour
     {
         StartCoroutine(FlashPlayer());
         hurtVfx.Play();
+                      
+    }
+
+    private void PlayDeathVfx()
+    {
+        dustKickVfx.Stop();
+        failVfx.Play();         
     }
 
     private IEnumerator FlashPlayer()
