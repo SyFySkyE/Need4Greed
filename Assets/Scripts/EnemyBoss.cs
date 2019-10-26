@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyBoss : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] private GameObject player;
     [SerializeField] private float yPos = 10;
     [SerializeField] private float zPos = 25f;
@@ -11,12 +12,26 @@ public class EnemyBoss : MonoBehaviour
     [SerializeField] private float xConstraint = 5f;
     [SerializeField] private float moveSpeed = 3f;
 
-    private enum BossState { Despawned, Spawning, Spawned, Moving, Firing, Dead, PhaseOne, PhaseTwo, PhaseThree}
+    [Header("Prefabs To Spawn")]
+    [SerializeField] private GameObject fireBall;
+    [SerializeField] private GameObject safeFireBall;
+    [SerializeField] private GameObject enemy;
+
+    [Header("Spawn Parameters")]
+    [SerializeField] private float timeBetweenSpawns = 1f;
+    [SerializeField] private int chanceOfSpawningSafe = 7;
+    [SerializeField] GameObject spawnLocation;
+
+    private enum BossState { Despawned, Spawning, Spawned, Moving, Firing, Dead}
     private BossState currentState;
+
+    private enum PhaseState { ZeroOne, PhaseOne, OneTwo, PhaseTwo, TwoThree, PhaseThree }
+    private PhaseState currentPhase;
 
     // Start is called before the first frame update
     void Start()
     {
+        currentPhase = PhaseState.ZeroOne;
         currentState = BossState.Despawned;
     }
 
@@ -41,6 +56,14 @@ public class EnemyBoss : MonoBehaviour
                 Move();
                 break;
         }
+
+        switch (currentPhase)
+        {
+            case PhaseState.ZeroOne:
+                InvokeRepeating("SpawnFireBalls", timeBetweenSpawns, timeBetweenSpawns);
+                currentPhase = PhaseState.PhaseOne;
+                break;
+        }
     }
 
     private void Spawn()
@@ -58,6 +81,19 @@ public class EnemyBoss : MonoBehaviour
         if (transform.position.x >= xConstraint || transform.position.x <= -xConstraint)
         {
             moveSpeed = -moveSpeed;
+        }
+    }
+
+    private void SpawnFireBalls()
+    {
+        int r = Random.Range(0, chanceOfSpawningSafe);
+        if (r == 0)
+        {
+            Instantiate(safeFireBall, spawnLocation.transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(fireBall, spawnLocation.transform.position, Quaternion.identity);
         }
     }
 }
