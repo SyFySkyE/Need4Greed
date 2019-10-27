@@ -22,6 +22,9 @@ public class EnemyBoss : MonoBehaviour
     [SerializeField] private int chanceOfSpawningSafe = 7;
     [SerializeField] GameObject spawnLocation;
 
+    [Header("State Parameters")]
+    [SerializeField] private float secondsBetweenStateChange = 3f;
+
     private enum BossState { Despawned, Spawning, Spawned, Moving, Firing, Dead}
     private BossState currentState;
 
@@ -95,5 +98,16 @@ public class EnemyBoss : MonoBehaviour
         {
             Instantiate(fireBall, spawnLocation.transform.position, Quaternion.identity);
         }
+    }
+
+    public void StateOneTwoTransition()
+    {
+        StartCoroutine(SwitchToOneTwo());
+    }
+
+    private IEnumerator SwitchToOneTwo()
+    {
+        Debug.Log("dwadawd");
+        yield return new WaitForSeconds(secondsBetweenStateChange);
     }
 }

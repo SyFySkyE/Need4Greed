@@ -7,11 +7,12 @@ public class FireBall : MonoBehaviour
     [SerializeField] private float backSpeed = -2f;
     [SerializeField] private EnemyBoss dragon;
     [SerializeField] private float moveTowardMotherSpeed = 10f;
+    [SerializeField] private float secondsBeforeDestroy = 5f;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        Destroy(this, secondsBeforeDestroy);
     }
 
     // Update is called once per frame
@@ -36,5 +37,8 @@ public class FireBall : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         dragon = FindObjectOfType<EnemyBoss>();        
+        this.gameObject.layer = 9;        
+            dragon.GetComponent<EnemyBoss>().StateOneTwoTransition();
+        
     }
 }

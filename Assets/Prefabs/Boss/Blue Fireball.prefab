@@ -28,14 +28,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174144793979940933}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029653306}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0.00000028088027}
   m_LocalPosition: {x: -0.177, y: -0.285, z: 2.08}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 8979288002893698668}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 179.99998, z: 0}
 --- !u!33 &5893078245134893908
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -92,8 +92,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6366825, y: 0.6366825, z: 0.9780729}
-  m_Center: {x: -3.6802836e-15, y: 0, z: 0.010963585}
+  m_Size: {x: 1.6508195, y: 1.4281034, z: 0.9780729}
+  m_Center: {x: 0.057804957, y: -0.39571047, z: 0.010963605}
 --- !u!65 &4193884196350732703
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -105,8 +105,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5679485, y: 0.18529147, z: 0.9452677}
-  m_Center: {x: -0.0017957669, y: 0.40735424, z: 0.027366208}
+  m_Size: {x: 1.2926733, y: 0.18529147, z: 1.409837}
+  m_Center: {x: 0.004925803, y: 0.40735424, z: 0.25965086}
 --- !u!114 &6060115886952857678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,8 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09df6c872b5733743bc9e44f484b069e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 2
-  startPos: {x: 0, y: 0, z: 0}
+  backSpeed: -2
+  dragon: {fileID: 0}
+  moveTowardMotherSpeed: 50
 --- !u!1 &7308738101320815197
 GameObject:
   m_ObjectHideFlags: 0
