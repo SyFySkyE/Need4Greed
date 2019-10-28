@@ -13,6 +13,7 @@ public class EnemyBoss : MonoBehaviour
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float chargeSpeed = 25f;
     [SerializeField] private float chargeTime = 5f;
+    [SerializeField] private float yPosWhenCharging = -1f;
 
     [Header("Prefabs To Spawn")]
     [SerializeField] private GameObject fireBall;
@@ -67,7 +68,8 @@ public class EnemyBoss : MonoBehaviour
             case BossState.Moving:
                 Move();
                 break;
-            case BossState.Charging:                
+            case BossState.Charging:               
+                
                 break;
         }
 
@@ -98,7 +100,7 @@ public class EnemyBoss : MonoBehaviour
 
     private void Move()
     {        
-        if (!isCharging)
+        if (currentState != BossState.Charging)
         {
             transform.position = new Vector3(transform.position.x, yPos, zPos + player.transform.position.z);
             transform.Translate(Vector3.right * Time.deltaTime * moveSpeed);
@@ -106,7 +108,11 @@ public class EnemyBoss : MonoBehaviour
             {
                 moveSpeed = -moveSpeed;
             }
-        }        
+        }
+        else
+        {
+            transform.position = new Vector3(transform.position.x, yPosWhenCharging, transform.position.z);
+        }
     }
 
     private void SpawnFireBalls()
@@ -141,16 +147,19 @@ public class EnemyBoss : MonoBehaviour
         }        
     }
 
-    private void ChargeForward()
-    {
-
-    }
-
     private void Charge()
-    {
+    {        
         currentState = BossState.Charging;
         bossAnim.SetTrigger("Charge");
-        
+        StartCoroutine(SwitchToMoving());
+    }
+
+    private IEnumerator SwitchToMoving()
+    {
+        yield return new WaitForSeconds(chargeTime);
+        currentState = BossState.Moving;
+        yield return new WaitForSeconds(chargeTime);
+        currentState = BossState.Charging;
     }
 
     public void StateOneTwoTransition()
@@ -178,5 +187,15 @@ public class EnemyBoss : MonoBehaviour
         currentPhase = PhaseState.TwoThree;
         yield return new WaitForSeconds(secondsBetweenStateChange);
         
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            bossAnim.SetTrigger("Hurt");
+            currentState = BossState.Dead;
+            Destroy(this.gameObject, 1f);
+        }
     }
 }
