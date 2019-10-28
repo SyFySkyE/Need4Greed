@@ -114,6 +114,15 @@ public class PlayerMover : MonoBehaviour
         }        
     }
 
+    public void LandOnBossEnemy()
+    {
+        if (playerManager.State != PlayerState.Recovering)
+        {
+            playerManager.State = PlayerState.LandingOnEnemy;
+            playerRB.AddForce(Vector3.up * bonusJumpForce, ForceMode.Impulse);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Obstacle") || other.gameObject.CompareTag("Enemy"))

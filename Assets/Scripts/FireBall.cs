@@ -12,7 +12,7 @@ public class FireBall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(this, secondsBeforeDestroy);
+        Destroy(this.gameObject, secondsBeforeDestroy);
     }
 
     // Update is called once per frame
@@ -38,7 +38,7 @@ public class FireBall : MonoBehaviour
     {
         dragon = FindObjectOfType<EnemyBoss>();        
         this.gameObject.layer = 9;        
-            dragon.GetComponent<EnemyBoss>().StateOneTwoTransition();
+        dragon.GetComponent<EnemyBoss>().StateOneTwoTransition();
         
     }
 }

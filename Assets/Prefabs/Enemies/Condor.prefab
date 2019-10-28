@@ -536,10 +536,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4742006124959712}
   - component: {fileID: 95761197108965826}
-  - component: {fileID: 1879019473}
-  - component: {fileID: 1879019474}
-  - component: {fileID: 1879019475}
-  - component: {fileID: 1879019472}
   m_Layer: 0
   m_Name: Condor
   m_TagString: Untagged
@@ -554,9 +550,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866390378080362}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.89999974, y: 0.8, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4328565854261316}
   - {fileID: 4282137226427460}
@@ -582,63 +578,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &1879019473
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866390378080362}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.2248054, y: 0.6858247, z: 1.0934544}
-  m_Center: {x: 0.015843842, y: 0.5824476, z: 0.04672718}
---- !u!65 &1879019474
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866390378080362}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.24791, y: 0.7067695, z: 1.2713356}
-  m_Center: {x: 0.057566036, y: -0.1466152, z: 0.02406311}
---- !u!65 &1879019475
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866390378080362}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.042394, z: 0.49094963}
-  m_Center: {x: 0, y: 0.6447324, z: 2.0642405}
---- !u!114 &1879019472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866390378080362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a999c50a9ad4cd43ad261d5c5c2ef85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 6
-  swaySpeed: 2
-  xConstraint: 5
-  xSway: 0
-  xSwayValue: 1
-  ySway: 1
-  ySwayValue: -1
-  distanceToStartMoving: 50
-  player: {fileID: 0}

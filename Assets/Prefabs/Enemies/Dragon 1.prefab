@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1584657525
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1584657526}
+  m_Layer: 11
+  m_Name: Mouth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1584657526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584657525}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0.1242, z: 1.6092}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9023132733785838936}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9023132733167364241
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,12 +292,11 @@ GameObject:
   m_Component:
   - component: {fileID: 9023132733785838936}
   - component: {fileID: 9023132734117608748}
-  - component: {fileID: 9023132734117608747}
   - component: {fileID: 9023132734117608746}
   - component: {fileID: 9023132734117608745}
   m_Layer: 11
   m_Name: Dragon 1
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -279,12 +308,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9023132734117608744}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000029653306}
+  m_LocalRotation: {x: 0, y: 1, z: -0, w: -0.0000001872535}
   m_LocalPosition: {x: 3.33, y: 10, z: 140.73589}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 9023132733869513175}
   - {fileID: 9023132733297243979}
+  - {fileID: 1584657526}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 0}
@@ -307,7 +337,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &9023132734117608747
+--- !u!65 &9023132734117608746
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -318,21 +348,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.1769955, y: 0.44433975, z: 2.2170622}
-  m_Center: {x: -0.07525007, y: 0.48062086, z: 0.36186612}
---- !u!65 &9023132734117608746
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9023132734117608744}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.0974138, y: 0.7735467, z: 2.1731186}
-  m_Center: {x: -0.07721126, y: -0.11322665, z: 0.3842449}
+  m_Size: {x: 2.0974138, y: 1.663024, z: 2.7334774}
+  m_Center: {x: -0.07721128, y: 0.33151188, z: 0.66442406}
 --- !u!114 &9023132734117608745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,11 +363,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  yPos: 5
-  zPos: 25
+  yPos: 2
+  zPos: 50
   zDistanceToSpawn: 50
-  xConstraint: 10
-  moveSpeed: 3
+  xConstraint: 7
+  moveSpeed: 5
+  fireBall: {fileID: 174144793979940933, guid: e335ba52ce405f74baa29e2969cfbdd4, type: 3}
+  safeFireBall: {fileID: 174144793979940933, guid: 9ea10eb360e89264fa0b8cfd74c58deb,
+    type: 3}
+  enemy: {fileID: 1674130526759142, guid: 6ff0cd15d1a2a2942b6bb5159b2a0b51, type: 3}
+  timeBetweenSpawns: 1
+  chanceOfSpawningSafe: 1
+  spawnLocation: {fileID: 1584657525}
+  secondsBetweenStateChange: 3
 --- !u!1 &9023132734197334394
 GameObject:
   m_ObjectHideFlags: 0

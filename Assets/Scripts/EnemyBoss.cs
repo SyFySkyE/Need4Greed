@@ -11,11 +11,14 @@ public class EnemyBoss : MonoBehaviour
     [SerializeField] private float zDistanceToSpawn = 50f;
     [SerializeField] private float xConstraint = 5f;
     [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private float chargeSpeed = 25f;
+    [SerializeField] private float chargeTime = 5f;
 
     [Header("Prefabs To Spawn")]
     [SerializeField] private GameObject fireBall;
     [SerializeField] private GameObject safeFireBall;
-    [SerializeField] private GameObject enemy;
+    [SerializeField] private GameObject badDragon;
+    [SerializeField] private GameObject goodDragon;
 
     [Header("Spawn Parameters")]
     [SerializeField] private float timeBetweenSpawns = 1f;
@@ -24,18 +27,23 @@ public class EnemyBoss : MonoBehaviour
 
     [Header("State Parameters")]
     [SerializeField] private float secondsBetweenStateChange = 3f;
+    [SerializeField] private float secBeforeHurtAnim = 3f;
 
-    private enum BossState { Despawned, Spawning, Spawned, Moving, Firing, Dead}
+    private enum BossState { Despawned, Spawning, Spawned, Moving, Firing, Dead, Charging }
     private BossState currentState;
 
     private enum PhaseState { ZeroOne, PhaseOne, OneTwo, PhaseTwo, TwoThree, PhaseThree }
     private PhaseState currentPhase;
 
+    private Animator bossAnim;
+    private bool isCharging = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        currentState = BossState.Moving;
+        bossAnim = GetComponent<Animator>();
         currentPhase = PhaseState.ZeroOne;
-        currentState = BossState.Despawned;
     }
 
     // Update is called once per frame
@@ -43,6 +51,7 @@ public class EnemyBoss : MonoBehaviour
     {
         HandleStates();
         Spawn();
+        Debug.Log(currentState);
     }
 
     private void HandleStates()
@@ -58,6 +67,8 @@ public class EnemyBoss : MonoBehaviour
             case BossState.Moving:
                 Move();
                 break;
+            case BossState.Charging:                
+                break;
         }
 
         switch (currentPhase)
@@ -66,6 +77,14 @@ public class EnemyBoss : MonoBehaviour
                 InvokeRepeating("SpawnFireBalls", timeBetweenSpawns, timeBetweenSpawns);
                 currentPhase = PhaseState.PhaseOne;
                 break;
+            case PhaseState.OneTwo:
+                InvokeRepeating("SpawnDragons", timeBetweenSpawns, timeBetweenSpawns);
+                currentPhase = PhaseState.PhaseTwo;
+                break;
+            case PhaseState.TwoThree:
+                InvokeRepeating("Charge", chargeTime, chargeTime);
+                currentPhase = PhaseState.PhaseThree;
+                break;
         }
     }
 
@@ -73,31 +92,65 @@ public class EnemyBoss : MonoBehaviour
     {        
         if (transform.position.z - player.transform.position.z <= zDistanceToSpawn)
         {
-            currentState = BossState.Moving;
+            
         }
     }
 
     private void Move()
     {        
-        transform.position = new Vector3(transform.position.x, yPos, zPos + player.transform.position.z);
-        transform.Translate(Vector3.right * Time.deltaTime * moveSpeed);
-        if (transform.position.x >= xConstraint || transform.position.x <= -xConstraint)
+        if (!isCharging)
         {
-            moveSpeed = -moveSpeed;
-        }
+            transform.position = new Vector3(transform.position.x, yPos, zPos + player.transform.position.z);
+            transform.Translate(Vector3.right * Time.deltaTime * moveSpeed);
+            if (transform.position.x >= xConstraint || transform.position.x <= -xConstraint)
+            {
+                moveSpeed = -moveSpeed;
+            }
+        }        
     }
 
     private void SpawnFireBalls()
     {
-        int r = Random.Range(0, chanceOfSpawningSafe);
-        if (r == 0)
+        if (currentPhase == PhaseState.PhaseOne)
         {
-            Instantiate(safeFireBall, spawnLocation.transform.position, Quaternion.identity);
-        }
-        else
+            int r = Random.Range(0, chanceOfSpawningSafe);
+            if (r == 0)
+            {
+                Instantiate(safeFireBall, spawnLocation.transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(fireBall, spawnLocation.transform.position, Quaternion.identity);
+            }
+        }        
+    }
+
+    private void SpawnDragons()
+    {
+        if (currentPhase == PhaseState.PhaseTwo)
         {
-            Instantiate(fireBall, spawnLocation.transform.position, Quaternion.identity);
-        }
+            int r = Random.Range(0, chanceOfSpawningSafe);
+            if (r == 0)
+            {
+                Instantiate(goodDragon, spawnLocation.transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(badDragon, spawnLocation.transform.position, Quaternion.identity);
+            }
+        }        
+    }
+
+    private void ChargeForward()
+    {
+
+    }
+
+    private void Charge()
+    {
+        currentState = BossState.Charging;
+        bossAnim.SetTrigger("Charge");
+        
     }
 
     public void StateOneTwoTransition()
@@ -107,7 +160,23 @@ public class EnemyBoss : MonoBehaviour
 
     private IEnumerator SwitchToOneTwo()
     {
-        Debug.Log("dwadawd");
+        yield return new WaitForSeconds(secBeforeHurtAnim);
+        bossAnim.SetTrigger("Hurt");
+        currentPhase = PhaseState.OneTwo;
         yield return new WaitForSeconds(secondsBetweenStateChange);
+    }
+
+    public void StateTwoThreeTransition()
+    {
+        StartCoroutine(SwitchToTwoThree());
+    }
+
+    private IEnumerator SwitchToTwoThree()
+    {
+        yield return new WaitForSeconds(secBeforeHurtAnim);
+        bossAnim.SetTrigger("Hurt");
+        currentPhase = PhaseState.TwoThree;
+        yield return new WaitForSeconds(secondsBetweenStateChange);
+        
     }
 }
